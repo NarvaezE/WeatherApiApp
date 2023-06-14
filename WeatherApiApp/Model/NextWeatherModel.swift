@@ -49,7 +49,7 @@ struct Rain: Decodable {
     let the3H: Double
 
     enum CodingKeys: String, CodingKey {
-        case the3H = "3hours"
+        case the3H = "3h"
     }
 }
 

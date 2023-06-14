@@ -69,7 +69,7 @@ func convertToDates(timeZoneOffset: Int) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.timeZone = timezone
     dateFormatter.locale = Locale(identifier: "en_US")
-    dateFormatter.dateFormat = "EEEE, MMMM d yyyy"
+    dateFormatter.dateFormat = "EEEE, MMMM d"
     
     let currentDateTime = Date()
     let formattedDateTime = dateFormatter.string(from: currentDateTime)

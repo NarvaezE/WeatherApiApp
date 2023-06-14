@@ -17,6 +17,7 @@ class CurrentWeatherVM:ObservableObject{
     @Published var temperature : String = "__"
     @Published var weatherDescription : String = "__"
     @Published var weatherIcon:String = ""
+    @Published var iconMain:String = ""
     public let currentWCall: CurrentWeatherApi
     
     init(currentWCall:CurrentWeatherApi){
@@ -32,9 +33,10 @@ class CurrentWeatherVM:ObservableObject{
                 self.cloudsProb = "\(weather.clouds) %"
                 self.windSpeed = "\(weather.wind) km/h"
                 self.humidity = "\(weather.humidity) %"
-                self.temperature = "\(weather.temperature)°C"
+                self.temperature = "\(weather.temperature)°"
                 self.weatherDescription = weather.description.capitalized
                 self.weatherIcon = weather.icon
+                self.iconMain = weather.iconMain
             }
         }
     }

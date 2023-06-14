@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct WeatherApiAppApp: App {
-    let persistenceController = PersistenceController.shared
+    let dbManager = DBManager.shared
 
     var body: some Scene {
         WindowGroup {
             
-            TabBar().environment(\.managedObjectContext, persistenceController.container.viewContext)
+            SplashScreen().environment(\.managedObjectContext, dbManager.managedObjectContext)
             
         }
     }

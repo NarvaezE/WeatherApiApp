@@ -17,6 +17,7 @@ public struct CurrentWeather{
     let temperature:String
     let description:String
     let icon:String
+    let iconMain:String
     
     init(response:CurrentW){
         city = response.name
@@ -28,6 +29,7 @@ public struct CurrentWeather{
         temperature = "\(Int(response.main.temp))"
         description = response.weather.first?.description ?? ""
         icon = response.weather.first?.icon ?? ""
+        iconMain = response.weather.first?.iconMain ?? ""
     }
 }
 
@@ -46,7 +48,7 @@ func convertToDate(timeZoneOffset: Int) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.timeZone = timezone
     dateFormatter.locale = Locale(identifier: "en_US")
-    dateFormatter.dateFormat = "EEEE, MMMM d yyyy"
+    dateFormatter.dateFormat = "EEEE, MMMM d "
     
     let currentDateTime = Date()
     let formattedDateTime = dateFormatter.string(from: currentDateTime)

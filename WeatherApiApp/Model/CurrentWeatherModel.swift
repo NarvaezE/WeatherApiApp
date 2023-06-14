@@ -29,6 +29,14 @@ struct Main:Decodable{
 
 struct Weather : Decodable{
     let description:String
+    let iconMain:String
     let icon:String
+    
+    enum CodingKeys: String,CodingKey{
+        case description
+        case iconMain = "main"
+        case icon
+        
+    }
     
 }

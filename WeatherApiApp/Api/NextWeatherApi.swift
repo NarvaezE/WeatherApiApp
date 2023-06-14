@@ -33,10 +33,10 @@ public final class NextWeatherApi: NSObject,ObservableObject{
         
         if let response = try? JSONDecoder().decode(ForecastData.self, from: data){
             let nextWeather = NextWeather(response: response)
-            print(response)
+            print(nextWeather)
             self.nWCompletionHandler?(nextWeather)
         }else{
-            print("\(String(describing: error))")
+            print("err")
         }
         }.resume()
     }

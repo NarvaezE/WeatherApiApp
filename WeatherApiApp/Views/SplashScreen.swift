@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SplashScreen: View {
     @State private var showMainView = false
-    let persistenceController = PersistenceController.shared
+    @Environment(\.managedObjectContext) private var vC
     var body: some View {
         ZStack {
             Image(systemName: "cloud.fill") // Reemplaza "splashImage" con el nombre de tu imagen
@@ -20,7 +20,7 @@ struct SplashScreen: View {
                 .animation(.easeInOut(duration: 0.5))
             
             if showMainView {
-                TabBar()
+                WeatherView(currentWVM: CurrentWeatherVM(currentWCall: CurrentWeatherApi()))
             }
         }
         .onAppear {

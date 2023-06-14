@@ -31,7 +31,6 @@ public final class CurrentWeatherApi: NSObject,ObservableObject {
         URLSession.shared.dataTask(with: url){ data, response, error in
             guard error == nil,let data = data else {return}
         
-        
         if let response = try? JSONDecoder().decode(CurrentW.self, from: data){
             let currWeather = CurrentWeather(response: response)
             self.cWCompletionHandler?(currWeather)

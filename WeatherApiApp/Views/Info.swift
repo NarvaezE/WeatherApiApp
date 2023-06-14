@@ -8,13 +8,24 @@
 import SwiftUI
 
 struct Info: View {
+    @Binding var showInfo : Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            HStack{
+                Button(action: {
+                    showInfo = false
+                }){
+                    Text("Regresar")
+                }
+                
+
+            }
+        }
     }
 }
 
 struct Info_Previews: PreviewProvider {
     static var previews: some View {
-        Info()
+        Info(showInfo: .constant(false))
     }
 }

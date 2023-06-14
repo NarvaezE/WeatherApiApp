@@ -17,13 +17,16 @@ struct WeatherArchive: View {
             
                 
             VStack{
-                HStack{
-                    Text("Weather Archive").multilineTextAlignment(.center).foregroundColor(.black).bold().font(.title2)
+                HStack(spacing:120){
                     Button(action: {
                         showArchive = false
                     }){
-                        Text("Regresar").foregroundColor(.black)
+                        Image(systemName: "arrow.backward").font(.title2).fontWeight(.bold)
                     }
+                    Text("Weather Archive").multilineTextAlignment(.center).foregroundColor(.black).bold().font(.title2)
+                        
+                    Text(" ")
+                    
                 }
                         
                         ScrollView {
@@ -78,7 +81,7 @@ struct WeatherArchive: View {
                     try? moc.save()
                 }
     
-            }.onAppear(perform: viewModel.refresh)
+            }.onAppear(perform: viewModel.refresh).fontWeight(.bold)
         }
 }
 

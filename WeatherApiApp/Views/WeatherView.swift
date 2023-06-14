@@ -77,7 +77,7 @@ struct WeatherView: View {
                                     ForEach(nextw.list.indices,id:\.self){ i in
                                         let item = nextw.list[i]
                                         VStack{
-                                            Text("\(item.temperature)°").font(.body)
+                                            Text("\(item.temperature)°").font(.body).fontWeight(.semibold)
                                             AsyncImage(
                                                 url: URL(string:  "https://openweathermap.org/img/wn/\(item.icon).png"),content: { image in image.resizable()
                                                         .aspectRatio(contentMode: .fit).frame(width:50, height: 50,alignment: .center)
@@ -87,8 +87,9 @@ struct WeatherView: View {
                                                 }
                                             )
                                             
-                                            Text(item.date ) .font(.body)
-                                            Text(item.timezone ).font(.body).fontWeight(.semibold)
+                                            Text(dayOfWeek(from: item.date ) ?? "**") .font(.body).fontWeight(.semibold)
+                                            Text(formatDate( string: item.date ) ).font(.body).fontWeight(.semibold)
+                                            Text(formatHour(timeString: item.timezone) ?? "**").font(.body).fontWeight(.semibold)
                                         }
                                         .foregroundColor(.white)
                                         .padding()
@@ -125,6 +126,56 @@ struct SunsetView: View {
             .edgesIgnoringSafeArea(.all)
     }
 }
+
+func dayOfWeek(from dateString: String) -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US")
+
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    guard let date = dateFormatter.date(from: dateString) else {
+        return nil
+    }
+    
+    let calendar = Calendar.current
+    let weekday = calendar.component(.weekday, from: date)
+    
+    let weekdaySymbols = dateFormatter.weekdaySymbols
+    let weekdayName = weekdaySymbols?[weekday - 1]
+    
+    return weekdayName?.capitalized
+}
+    
+    
+func formatDate(string: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US")
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    guard let date = dateFormatter.date(from: string) else { return "" }
+    
+    let outputDateFormatter = DateFormatter()
+    outputDateFormatter.locale = Locale(identifier: "en_US")
+    outputDateFormatter.dateFormat = "MMMM, d, yyyy"
+    let formattedDate = outputDateFormatter.string(from: date)
+    
+    return formattedDate.capitalized
+}
+    
+func formatHour(timeString: String) -> String? {
+    let inputFormatter = DateFormatter()
+    inputFormatter.dateFormat = "HH:mm:ss"
+    
+    guard let date = inputFormatter.date(from: timeString) else {
+        return nil
+    }
+    
+    let outputFormatter = DateFormatter()
+    outputFormatter.dateFormat = "hh:mm a"
+    
+    let formattedTime = outputFormatter.string(from: date)
+    return formattedTime
+}
+
+
 
 struct WeatherView_Previews: PreviewProvider {
     static var previews: some View {
